@@ -69,75 +69,81 @@ Unfortunately, this doesn't help very much if we are interested in comparing the
 We can also add to each plot a lowess fitted line. This is not for the sake of any inference or prediction, but just to consolidate our visualization into some loosely fitted lines.
 
 ```{r}
+# First declare four subsets of the data set -- this will make future code less bulky when we split into one of the for diets for a plot.
+ChickWeight1 = ChickWeight[which(ChickWeight$Diet==1), ]
+ChickWeight2 = ChickWeight[which(ChickWeight$Diet==2), ]
+ChickWeight3 = ChickWeight[which(ChickWeight$Diet==3), ]
+ChickWeight4 = ChickWeight[which(ChickWeight$Diet==4), ]
+
 # Prepare to plot 4 plots next to each other
 par(mfrow=c(2,2))
 
 # Create plot for Diet 1
-plot(data=ChickWeight[which(ChickWeight$Diet==1), ],
+plot(data=ChickWeight1,
      weight~jitter(Time, 1), col='blue', pch=16, cex=0.6, 
      xlim=c(0, 22), ylim=c(40, 375), xlab="Age", ylab="Weight",
      main="Diet 1,  Weight vs. Age")
 # Add lowess line to Diet 1 plot
-lines(lowess(ChickWeight[which(ChickWeight$Diet==1), ]$Time,
-             ChickWeight[which(ChickWeight$Diet==1), ]$weight))
+lines(lowess(ChickWeight1$Time,
+             ChickWeight1$weight))
 # Create plot for Diet 2
-plot(data=ChickWeight[which(ChickWeight$Diet==2), ],
+plot(data=ChickWeight2,
      weight~jitter(Time, 1), pch=16, cex=0.6, col="red",
      xlim=c(0, 22), ylim=c(40, 375), xlab="Age", ylab="Weight",
      main="Diet 2,  Weight vs. Age")
 # Add lowess line to Diet 2 plot
-lines(lowess(ChickWeight[which(ChickWeight$Diet==2), ]$Time,
-             ChickWeight[which(ChickWeight$Diet==2), ]$weight))
+lines(lowess(ChickWeight2$Time,
+             ChickWeight2$weight))
 # Create plot for Diet 3
-plot(data=ChickWeight[which(ChickWeight$Diet==3), ],
+plot(data=ChickWeight3,
      weight~jitter(Time, 1), pch=16, cex=0.6, col="green",
      xlim=c(0, 22), ylim=c(40, 375), xlab="Age", ylab="Weight",
      main="Diet 3,  Weight vs. Age")
 # Add lowess line to Diet 3 plot
-lines(lowess(ChickWeight[which(ChickWeight$Diet==3), ]$Time,
-             ChickWeight[which(ChickWeight$Diet==3), ]$weight))
+lines(lowess(ChickWeight3$Time,
+             ChickWeight3$weight))
 # Create plot for Diet 4
-plot(data=ChickWeight[which(ChickWeight$Diet==4), ],
+plot(data=ChickWeight4,
      weight~jitter(Time, 1), pch=16, cex=0.6, col="purple",
      xlim=c(0, 22), ylim=c(40, 375), xlab="Age", ylab="Weight",
      main="Diet 4,  Weight vs. Age")
 # Add lowess line to Diet 4 plot
-lines(lowess(ChickWeight[which(ChickWeight$Diet==4), ]$Time,
-             ChickWeight[which(ChickWeight$Diet==4), ]$weight))
+lines(lowess(ChickWeight4$Time,
+             ChickWeight4$weight))
 ```
 
 As an alternative method of comparing diets, we can add these four fitted lines to the original plot, as follows.
 
 ```{r}
 # Create plot with only blue points (Diet 1)
-plot(data=ChickWeight[which(ChickWeight$Diet==1), ],
+plot(data=ChickWeight1,
      weight~jitter(Time, 1), col='blue', pch=16, cex=0.6,
      xlim=c(0, 22), ylim=c(40, 375), xlab="Age", 
      ylab="Weight", main="Weight vs. Age by Diet")
 # Add red points (Diet 2)
-points(ChickWeight[which(ChickWeight$Diet==2),]$weight~
-         jitter(ChickWeight[which(ChickWeight$Diet==2), ]$Time),
+points(ChickWeight2$weight~
+         jitter(ChickWeight2$Time),
        pch=16, cex=0.6, col="red")
 # Add green points (Diet 3)
-points(ChickWeight[which(ChickWeight$Diet==3), ]$weight~
-         jitter(ChickWeight[which(ChickWeight$Diet==3), ]$Time),
+points(ChickWeight3$weight~
+         jitter(ChickWeight3$Time),
        pch=16, cex=0.6, col="green")
 # Add purple points (Diet 4)
-points(ChickWeight[which(ChickWeight$Diet==4), ]$weight~
-         jitter(ChickWeight[which(ChickWeight$Diet==4), ]$Time),
+points(ChickWeight4$weight~
+         jitter(ChickWeight4$Time),
        pch=16, cex=0.6, col="purple")
 # Add all four lowess lines
-lines(lowess(ChickWeight[which(ChickWeight$Diet==1), ]$Time,
-             ChickWeight[which(ChickWeight$Diet==1), ]$weight),
+lines(lowess(ChickWeight1$Time,
+             ChickWeight1$weight),
       col='blue', lwd=2)
-lines(lowess(ChickWeight[which(ChickWeight$Diet==2), ]$Time,
-             ChickWeight[which(ChickWeight$Diet==2), ]$weight),
+lines(lowess(ChickWeight2$Time,
+             ChickWeight2$weight),
       col='red', lwd=2)
-lines(lowess(ChickWeight[which(ChickWeight$Diet==3), ]$Time,
-             ChickWeight[which(ChickWeight$Diet==3), ]$weight),
+lines(lowess(ChickWeight3$Time,
+             ChickWeight3$weight),
       col='green', lwd=2)
-lines(lowess(ChickWeight[which(ChickWeight$Diet==4), ]$Time,
-             ChickWeight[which(ChickWeight$Diet==4), ]$weight),
+lines(lowess(ChickWeight4$Time,
+             ChickWeight4$weight),
       col='purple', lwd=2)
 # Add legend labelling colours
 legend(x=0, y=350, col=c('blue', 'red', 'green', 'purple'),
