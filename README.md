@@ -3,7 +3,7 @@
 
 Welcome! This is a repository used to store the contents of Homework Assignment 1 of *STAT545*, a course taught in the fall of 2018 at the University of British Columbia.
 
-This repository is only contributed to by Eric Sanders, me! To see the main contribution to this repository besides this Readme, please **[click here](https://github.com/STAT545-UBC-students/hw01-ericjsanders/blob/master/hw01Exploration.md)**!
+This repository is only contributed to by Eric Sanders, me! To see the main contribution to this repository besides this ReadMe, a quick exploration of the `ChickWeight` data frame in R, please **[click here](https://github.com/STAT545-UBC-students/hw01-ericjsanders/blob/master/hw01Exploration.md)**!
 
 ### Useful Links for Those Interested in *STAT545*
 
