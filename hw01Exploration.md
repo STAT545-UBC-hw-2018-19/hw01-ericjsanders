@@ -82,7 +82,9 @@ Exploring the Data with Plots
 Now, let us look at how weight tends to vary with age. We can even include some jitter to get a better idea of how the points are dispersed.
 
 ``` r
-plot(data=ChickWeight,weight~jitter(Time,1),pch=16,cex=0.6,xlim=c(0,22),ylim=c(40,375),xlab="Age",ylab="Weight",main="Weight vs. Age")
+plot(data=ChickWeight, weight~jitter(Time,1), pch=16,
+     cex=0.6, xlim=c(0,22), ylim=c(40,375), xlab="Age",
+     ylab="Weight", main="Weight vs. Age")
 ```
 
 ![](hw01Exploration_files/figure-markdown_github/unnamed-chunk-3-1.png)
@@ -94,14 +96,30 @@ We can also add to each plot a lowess fitted line. This is not for the sake of a
 ``` r
 par(mfrow=c(2,2))
 
-plot(data=ChickWeight[which(ChickWeight$Diet==1),],weight~jitter(Time,1),col='blue',pch=16,cex=0.6,xlim=c(0,22),ylim=c(40,375),xlab="Age",ylab="Weight",main="Diet 1, Weight vs. Age")
-lines(lowess(ChickWeight[which(ChickWeight$Diet==1),]$Time,ChickWeight[which(ChickWeight$Diet==1),]$weight))
-plot(data=ChickWeight[which(ChickWeight$Diet==2),],weight~jitter(Time,1),pch=16,cex=0.6,col="red",xlim=c(0,22),ylim=c(40,375),xlab="Age",ylab="Weight",main="Diet 2, Weight vs. Age")
-lines(lowess(ChickWeight[which(ChickWeight$Diet==2),]$Time,ChickWeight[which(ChickWeight$Diet==2),]$weight))
-plot(data=ChickWeight[which(ChickWeight$Diet==3),],weight~jitter(Time,1),pch=16,cex=0.6,col="green",xlim=c(0,22),ylim=c(40,375),xlab="Age",ylab="Weight",main="Diet 3, Weight vs. Age")
-lines(lowess(ChickWeight[which(ChickWeight$Diet==3),]$Time,ChickWeight[which(ChickWeight$Diet==3),]$weight))
-plot(data=ChickWeight[which(ChickWeight$Diet==4),],weight~jitter(Time,1),pch=16,cex=0.6,col="purple",xlim=c(0,22),ylim=c(40,375),xlab="Age",ylab="Weight",main="Diet 4, Weight vs. Age")
-lines(lowess(ChickWeight[which(ChickWeight$Diet==4),]$Time,ChickWeight[which(ChickWeight$Diet==4),]$weight))
+plot(data=ChickWeight[which(ChickWeight$Diet==1), ],
+     weight~jitter(Time, 1), col='blue', pch=16, cex=0.6, 
+     xlim=c(0, 22), ylim=c(40, 375), xlab="Age", ylab="Weight",
+     main="Diet 1,  Weight vs. Age")
+lines(lowess(ChickWeight[which(ChickWeight$Diet==1), ]$Time,
+             ChickWeight[which(ChickWeight$Diet==1), ]$weight))
+plot(data=ChickWeight[which(ChickWeight$Diet==2), ],
+     weight~jitter(Time, 1), pch=16, cex=0.6, col="red",
+     xlim=c(0, 22), ylim=c(40, 375), xlab="Age", ylab="Weight",
+     main="Diet 2,  Weight vs. Age")
+lines(lowess(ChickWeight[which(ChickWeight$Diet==2), ]$Time,
+             ChickWeight[which(ChickWeight$Diet==2), ]$weight))
+plot(data=ChickWeight[which(ChickWeight$Diet==3), ],
+     weight~jitter(Time, 1), pch=16, cex=0.6, col="green",
+     xlim=c(0, 22), ylim=c(40, 375), xlab="Age", ylab="Weight",
+     main="Diet 3,  Weight vs. Age")
+lines(lowess(ChickWeight[which(ChickWeight$Diet==3), ]$Time,
+             ChickWeight[which(ChickWeight$Diet==3), ]$weight))
+plot(data=ChickWeight[which(ChickWeight$Diet==4), ],
+     weight~jitter(Time, 1), pch=16, cex=0.6, col="purple",
+     xlim=c(0, 22), ylim=c(40, 375), xlab="Age", ylab="Weight",
+     main="Diet 4,  Weight vs. Age")
+lines(lowess(ChickWeight[which(ChickWeight$Diet==4), ]$Time,
+             ChickWeight[which(ChickWeight$Diet==4), ]$weight))
 ```
 
 ![](hw01Exploration_files/figure-markdown_github/unnamed-chunk-4-1.png)
@@ -109,15 +127,33 @@ lines(lowess(ChickWeight[which(ChickWeight$Diet==4),]$Time,ChickWeight[which(Chi
 As an alternative method of comparing diets, we can add these four fitted lines to the original plot, as follows.
 
 ``` r
-plot(data=ChickWeight[which(ChickWeight$Diet==1),],weight~jitter(Time,1),col='blue',pch=16,cex=0.6,xlim=c(0,22),ylim=c(40,375),xlab="Age",ylab="Weight",main="Weight vs. Age by Diet")
-points(ChickWeight[which(ChickWeight$Diet==2),]$weight~jitter(ChickWeight[which(ChickWeight$Diet==2),]$Time),pch=16,cex=0.6,col="red")
-points(ChickWeight[which(ChickWeight$Diet==3),]$weight~jitter(ChickWeight[which(ChickWeight$Diet==3),]$Time),pch=16,cex=0.6,col="green")
-points(ChickWeight[which(ChickWeight$Diet==4),]$weight~jitter(ChickWeight[which(ChickWeight$Diet==4),]$Time),pch=16,cex=0.6,col="purple")
-lines(lowess(ChickWeight[which(ChickWeight$Diet==1),]$Time,ChickWeight[which(ChickWeight$Diet==1),]$weight),col='blue',lwd=2)
-lines(lowess(ChickWeight[which(ChickWeight$Diet==2),]$Time,ChickWeight[which(ChickWeight$Diet==2),]$weight),col='red',lwd=2)
-lines(lowess(ChickWeight[which(ChickWeight$Diet==3),]$Time,ChickWeight[which(ChickWeight$Diet==3),]$weight),col='green',lwd=2)
-lines(lowess(ChickWeight[which(ChickWeight$Diet==4),]$Time,ChickWeight[which(ChickWeight$Diet==4),]$weight),col='purple',lwd=2)
-legend(x=0,y=350,col=c('blue','red','green','purple'),lty=c(1,1,1,1),c("Diet 1","Diet 2","Diet 3",'Diet 4'))
+plot(data=ChickWeight[which(ChickWeight$Diet==1), ],
+     weight~jitter(Time, 1), col='blue', pch=16, cex=0.6,
+     xlim=c(0, 22), ylim=c(40, 375), xlab="Age", 
+     ylab="Weight", main="Weight vs. Age by Diet")
+points(ChickWeight[which(ChickWeight$Diet==2),]$weight~
+         jitter(ChickWeight[which(ChickWeight$Diet==2), ]$Time),
+       pch=16, cex=0.6, col="red")
+points(ChickWeight[which(ChickWeight$Diet==3), ]$weight~
+         jitter(ChickWeight[which(ChickWeight$Diet==3), ]$Time),
+       pch=16, cex=0.6, col="green")
+points(ChickWeight[which(ChickWeight$Diet==4), ]$weight~
+         jitter(ChickWeight[which(ChickWeight$Diet==4), ]$Time),
+       pch=16, cex=0.6, col="purple")
+lines(lowess(ChickWeight[which(ChickWeight$Diet==1), ]$Time,
+             ChickWeight[which(ChickWeight$Diet==1), ]$weight),
+      col='blue', lwd=2)
+lines(lowess(ChickWeight[which(ChickWeight$Diet==2), ]$Time,
+             ChickWeight[which(ChickWeight$Diet==2), ]$weight),
+      col='red', lwd=2)
+lines(lowess(ChickWeight[which(ChickWeight$Diet==3), ]$Time,
+             ChickWeight[which(ChickWeight$Diet==3), ]$weight),
+      col='green', lwd=2)
+lines(lowess(ChickWeight[which(ChickWeight$Diet==4), ]$Time,
+             ChickWeight[which(ChickWeight$Diet==4), ]$weight),
+      col='purple', lwd=2)
+legend(x=0, y=350, col=c('blue', 'red', 'green', 'purple'),
+       lty=c(1, 1, 1, 1), c("Diet 1", "Diet 2", "Diet 3", 'Diet 4'))
 ```
 
 ![](hw01Exploration_files/figure-markdown_github/unnamed-chunk-5-1.png)
